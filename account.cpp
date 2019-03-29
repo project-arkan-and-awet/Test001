@@ -13,6 +13,7 @@ class Account
 {
 public: int AccountNumber;
 public: double Balance;
+public: double amountWithdrawed;
 public: Account(int AN,double B )
     {
         AccountNumber=AN;
@@ -39,7 +40,7 @@ public: Account(int AN,double B )
     
 public: double withDraw(double amount)
     {
-        double amountWithdrawed=amount;
+         amountWithdrawed=amount;
         if (Balance >1 && amountWithdrawed<Balance) {
             Balance -=amountWithdrawed;
             
@@ -54,7 +55,7 @@ public: double withDraw(double amount)
 public: void Deposit(double amount)
     {
         Balance+=amount;
-        cout <<"You Deposited $"<<amount<<". Into You Checking Account"<<". Your current Balance is "<<getBalance()<<endl;
+        cout <<"You Deposited $"<<amount<<". Into You Checking Account"<<". Your current Balance is "<<getBalance()-amountWithdrawed<<endl;
         
     }
     public : void accountRecipt()
@@ -110,23 +111,31 @@ public: void postInterest()
     {
         cout << interestRate<< endl;
     }
-public: void verifyBalance(Account balance)
+public: bool verifyBalance(Account balance)
     {
+        balanceBelowMin=false;
         if (balance.getBalance()<minBalance) {
             balanceBelowMin=true;
             balance.getBalance()-serviceCharge;
             cout <<"ALERT!!! Your Balance is below minimum"<<endl;
+            return true;
         }else
         {
             balanceBelowMin=false;
             cout <<"Your balance is Good ('_')"<<endl;
         }
+        return  false;
     }
 public: void writeCheck(double amount,Account user)
     {
-        double checkAmount=user.withDraw(amount);
-        cout<< "I Authorize the Payment of $"<<checkAmount<<endl;
-        cout << "Now your Balance is $"<< user.getBalance()<<endl;
+        if (verifyBalance(user)) {
+            double checkAmount=user.withDraw(amount);
+            cout<< "I Authorize the Payment of $"<<checkAmount<<endl;
+            cout << "Now your Balance is $"<< user.getBalance()<<endl;
+        }else{
+            cout <<"Your balance is Good ('_')"<<endl;
+        }
+        
     }
 public: void printAccountInfo(Account user)
     {
@@ -178,23 +187,31 @@ public: void postInterest()
     {
         cout << SavinginterestRate<< endl;
     }
-public: void verifyBalance(Account balance)
+public: bool SavingverifyBalance(Account balance)
     {
+        SavingbalanceBelowMin=false;
         if (balance.getBalance()<SavingminBalance) {
             SavingbalanceBelowMin=true;
             balance.getBalance()-SavingserviceCharge;
             cout <<"ALERT!!! Your Balance is below minimum"<<endl;
+            return  true;
         }else
         {
             SavingbalanceBelowMin=false;
             cout <<"Your balance is Good ('_')"<<endl;
         }
+        return  SavingbalanceBelowMin;
     }
 public: void writeCheckForSaving(double amount,Account user)
     {
-        double checkAmount=user.withDraw(amount);
-        cout<< "I Authorize the Payment of $"<<checkAmount<<endl;
-        cout << "Now your Balance is $"<< user.getBalance()<<endl;
+        if (SavingverifyBalance(user)) {
+            double checkAmount=user.withDraw(amount);
+            cout<< "I Authorize the Payment of $"<<checkAmount<<endl;
+            cout << "Now your Balance is $"<< user.getBalance()<<endl;
+        }else{
+            
+        }
+        
     }
 public: void printAccountInfo(Account user)
     {
@@ -207,12 +224,14 @@ public: void printAccountInfo(Account user)
         // insert code here...
         Account awet=Account(3454,1000);
         awet.accountRecipt();
+        
         CheckingAccount awetCheckingAccount=CheckingAccount(awet);
+        
         SavingAccount awetSavingAccount=SavingAccount(awet);
 
         awetCheckingAccount.printAccountInfo(awet);
         awetCheckingAccount.writeCheck(100,awet);
-        awet.Deposit(2000);
+        awet.withDraw(5000);
         
         
         
