@@ -1,0 +1,55 @@
+#includes <iostream>;
+using namespace std;
+
+class MemberType
+{
+    public : string First_Name;
+    public : string Last_Name;
+    public : string Member_id;
+    public : int Orders;
+    public : int Amount_spent;
+    
+    public:  MemberType(string FN, string LN,string member_id,int orders,int amount_spent)
+    {
+        First_Name=FN;
+        Last_Name=LN;
+        Member_id=member_id;
+        Orders=orders;
+        Amount_spent=amount_spent;
+    }
+    public: string get_First_Name()
+    {
+        return First_Name;
+    }
+    public: string get_Last_Name()
+    {
+        return Last_Name;
+    }
+    public: int get_Member_id()
+    {
+        return Member_id;
+    }
+    public: int get_Order()
+    {
+        return Orders;
+    }
+    public: int  get_Amount_Spent()
+    {
+        return Amount_spent;
+    }
+    public: void set_First_Name(string first)
+    {
+        First_Name=first;
+    }
+    public: void set_Last_Name(string last)
+    {
+        Last_Name=last;
+    }
+    public: void set_Member_id(int id)
+    {
+        Member_id=id;
+    }
+    
+    
+    
+}
