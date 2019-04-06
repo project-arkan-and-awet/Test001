@@ -1,134 +1,133 @@
-
+//
+//  main.cpp
+//  Lab-2 A
+//
+//  Created by Awet Fikadu on 3/16/19.
+//  Copyright © 2019 Awet Fikadu. All rights reserved.
+//
 
 #include <iostream>
+#include <list>
 
-using namespace std;
-
-
-
-class BookType
-{
-public: string Title;
-public: static string author_one,author_two,author_three,author_four;
-public: string heading_one,heading_two,heading_three,heading_four,heading_five,heading_six;
-public: string ISBN;
-public: string Publisher;
-public: double Price;
-public: int Year_of_publication;
-public: int Number_of_copies;
-public: int Number_of_authors;
-public: int Number_of_headings;
-    
-public: BookType(string title,string heading,string isbn,string publisher,double price,int YearOFPublication,int NumberOFCopies)
-    {
-        Title=title;
-        heading_one=heading;
-        ISBN=isbn;
-        Publisher=publisher;
-        Price=price;
-        Year_of_publication=YearOFPublication;
-        Number_of_copies=NumberOFCopies;
-        
-    }
-    
-public: string get_Title()
-    {
-        return  Title;
-    }
-public: void set_Title(string T)
-    {
-        Title=T;
-        
-    }
-public: string check_Title(string T)
-    {
-        if (Title==T) {
-            return "Title is Right";
-        }
-        
-        return  "Title is not Right";
-        
-    }
-public: int get_Number_of_Copies()
-    {
-        return Number_of_copies;
-    }
-public: void set_Number_of_Copies(int copies)
-    {
-        Number_of_copies=copies;
-    }
-public: int Update_Number_of_Copies()
-    {
-        return Number_of_copies;
-        
-    }
-public: string get_Publisher()
-    {
-        return Publisher;
-    }
-public: void set_Publisher(string Pub)
-    {
-        Publisher=Pub;
-        
-    }
-public: double get_Price()
-    {
-        return Price;
-        
-    }
-public: void set_Price(double newPrice)
-    {
-        Price=newPrice;
-    }
-public: string get_ISBN()
-    {
-        return ISBN;
-    }
-public: void set_ISBN(string new_ISBN)
-    {
-        ISBN=new_ISBN;
-    }
-public: void set_Author(string Author_one,string Author_two,string Author_three,string Author_four)
-    {
-        author_one=Author_one;
-        Author_two=Author_two;
-        author_three=Author_three;
-        author_four=Author_four;
-    }
-public: void set_Author(string Author_one,string Author_two)
-    {
-        author_one=Author_one;
-        author_two=Author_two;
-    }
-public: void set_Author(string Author_one)
-    {
-        author_one=Author_one;
-        
-    }
-    
-     public: string get_Authors()
-     {
-     return author_one+" "+author_two+" "+author_three+" "+author_four;
-     }
-     
-    
-    
-    
-    
-    
-    
-};
-
-
-
-int main()
-{
-    BookType math=BookType("Algebra", "Pei", "sfd34234", "Macipub", 34.0,2009,4);
-    cout <<math.get_Publisher()<<endl;
-    cout <<math.check_Title("Algebra")<<endl;
-    math.set_Author("Arkan Mekonen","sdas","das","dasdd");
-        cout <<math.get_Authors()<<endl;
-
-    
-    return 0;
-}
+ using namespace std;
+ 
+ class BookType
+ {
+ public: string Title;
+ public: static string author_one,author_two,author_three,author_four;
+ public: string heading_one,heading_two,heading_three,heading_four,heading_five,heading_six;
+ public: string ISBN;
+ public: string Publisher;
+ public: double Price;
+ public: int Year_of_publication;
+ public: int Number_of_copies;
+ public: int Number_of_authors;
+ public: int Number_of_headings;
+ 
+ public: BookType(string title,string heading,string isbn,string publisher,double price,int YearOFPublication,int NumberOFCopies)
+ {
+ Title=title;
+ heading_one=heading;
+ ISBN=isbn;
+ Publisher=publisher;
+ Price=price;
+ Year_of_publication=YearOFPublication;
+ Number_of_copies=NumberOFCopies;
+ 
+ }
+ 
+ public: string get_Title()
+ {
+ return  Title;
+ }
+ public: void set_Title(string T)
+ {
+ Title=T;
+ 
+ }
+ public: string check_Title(string T)
+ {
+ if (Title==T) {
+ return "Title is Right";
+ }else
+     return  "Title is not Right";       //change made here (else)
+ 
+ }
+ public: int get_Number_of_Copies()
+ {
+ return Number_of_copies;
+ }
+ public: void set_Number_of_Copies(int copies)
+ {
+ Number_of_copies=copies;
+ }
+ public: int Update_Number_of_Copies(int newNOC)     // changes (new argument passed)
+ {
+ return Number_of_copies += newNOC;
+ 
+ }
+ public: string get_Publisher()
+ {
+ return Publisher;
+ }
+ public: void set_Publisher(string Pub)
+ {
+ Publisher=Pub;
+ 
+ }
+ public: double get_Price()
+ {
+ return Price;
+ 
+ }
+ public: void set_Price(double newPrice)
+ {
+ Price=newPrice;
+ }
+ public: string get_ISBN()
+ {
+ return ISBN;
+ }
+ public: void set_ISBN(string new_ISBN)
+ {
+ ISBN=new_ISBN;
+ }
+ public: void set_Author(string Author_one,string Author_two,string Author_three,string Author_four)
+ {
+ author_one=Author_one;
+ author_two=Author_two;
+ author_three=Author_three;
+ author_four=Author_four;
+ }
+ public: void set_Author(string Author_one,string Author_two)
+ {
+ author_one=Author_one;
+ author_two=Author_two;
+ }
+ public: void set_Author(string Author_one)
+ {
+ author_one=Author_one;
+ 
+ }
+ 
+ public: string get_Authors()
+ {
+ return author_one+" "+author_two+" "+author_three+" "+author_four;
+ }
+ 
+ 
+ };
+ 
+ 
+ 
+ int main()
+ {
+ BookType math=BookType("Algebra", "Pei", "sfd34234", "Macipub", 34.0,2009,4);
+ cout <<math.get_Publisher()<<endl;
+ cout <<math.check_Title("Algebra")<<endl;
+ math.set_Author("Arkan Mekonen","sdas","das","dasdd");
+ cout <<math.get_Authors()<<endl;
+ 
+ 
+ return 0;
+ }
