@@ -1,13 +1,15 @@
-
+//
+//  main.cpp
+//  Lab-2 D
+//
+//  Created by Awet Fikadu on 3/29/19.
+//  Copyright © 2019 Awet Fikadu. All rights reserved.
+//
 
 #include <stdio.h>
 #include <iostream>
 
 using namespace std;
-
-
-
-
 
 class Account
 {
@@ -21,12 +23,12 @@ public: Account(int AN,double B )
         
     }
     
-    public: void setAccountNUmber(int A)
+public: void setAccountNUmber(int A)
     {
         AccountNumber=A;
-        
+
     }
-    public: int getAccountNumber()
+public: int getAccountNumber()
     {
         return AccountNumber;
     }
@@ -35,12 +37,11 @@ public: Account(int AN,double B )
     {
         return Balance;
     }
-    
-    
+
     
 public: double withDraw(double amount)
     {
-         amountWithdrawed=amount;
+        amountWithdrawed=amount;
         if (Balance >1 && amountWithdrawed<Balance) {
             Balance -=amountWithdrawed;
             
@@ -48,33 +49,34 @@ public: double withDraw(double amount)
             cout <<"ALERT!!!"<<endl;
             cout <<"Your current amount is lower"<<endl;
             
-            
         }
         return  amountWithdrawed;
     }
 public: void Deposit(double amount)
     {
+       
+        
         Balance+=amount;
-        cout <<"You Deposited $"<<amount<<". Into You Checking Account"<<". Your current Balance is "<<getBalance()-amountWithdrawed<<endl;
+        cout <<"You Deposited $"<<amount<<" into Your  Account"<<". Your current Balance is "<<getBalance()-amountWithdrawed<<endl;
         
     }
     public : void accountRecipt()
     {
-        cout << "Your current Balance is $"<<Balance<<". And your Account Number is #"<<AccountNumber<<endl;
+        cout << "Your current Balance is $"<<Balance<<endl;
+        cout<<"And your Account Number is #"<<AccountNumber<<"."<<"\t"<<endl;
+        cout<<""<<endl;
     }
-    
-    
-
-
 };
+
 class CheckingAccount : Account
 {
     public : double interestRate;
-    public :double minBalance;
+    public: double Checking_Balance=0;
+    public :double  minBalance;
     public :double serviceCharge=5;
-    public :bool balanceBelowMin;
+    public :bool ChekingBalanceBelowMin;
     
-public: CheckingAccount(Account user) :Account(user.getAccountNumber(),user.getBalance())
+public: CheckingAccount(Account user) :Account(user.AccountNumber,user.Balance)
     {
         setInterestRate(user);
         
@@ -82,12 +84,16 @@ public: CheckingAccount(Account user) :Account(user.getAccountNumber(),user.getB
     
 public: void setInterestRate(Account balance)
     {
-        double IR=balance.getBalance();
+        double IR = balance.getBalance();
         interestRate=IR*0.002*1;
     }
 public: double retireiveInterestRate()
     {
         return interestRate;
+    }
+public: void postInterest(Account balance)
+    {
+        cout << interestRate<< endl;
     }
 public: void setMinimumBalance(Account balance)
     {
@@ -99,32 +105,34 @@ public: double retireveMinimumBalance()
     {
         return minBalance;
     }
-public: void setServiceCharges(int serviceC)
+public: void setServiceCharges(double serviceC)
     {
-        serviceCharge=serviceC;
+        if (Balance <= minBalance){
+            serviceCharge=serviceC;
+
+        }
     }
 public: double retireveServiceCharges()
     {
         return serviceCharge;
     }
-public: void postInterest()
+
+public: bool verifyBalance(Account user)
     {
-        cout << interestRate<< endl;
-    }
-public: bool verifyBalance(Account balance)
-    {
-        balanceBelowMin=false;
-        if (balance.getBalance()<minBalance) {
-            balanceBelowMin=true;
-            balance.getBalance()-serviceCharge;
+        //balanceBelowMin=false;
+        if (user.Balance<= minBalance) {
+            ChekingBalanceBelowMin=true;
             cout <<"ALERT!!! Your Balance is below minimum"<<endl;
-            return true;
+            cout<<""<<endl;
+            //return true;
         }else
         {
-            balanceBelowMin=false;
+            ChekingBalanceBelowMin=false;
             cout <<"Your balance is Good ('_')"<<endl;
+            cout<<""<<endl;
         }
-        return  false;
+        //return  false;
+        return ChekingBalanceBelowMin;
     }
 public: void writeCheck(double amount,Account user)
     {
@@ -132,25 +140,33 @@ public: void writeCheck(double amount,Account user)
             double checkAmount=user.withDraw(amount);
             cout<< "I Authorize the Payment of $"<<checkAmount<<endl;
             cout << "Now your Balance is $"<< user.getBalance()<<endl;
+            cout<<""<<endl;
         }else{
             cout <<"Your balance is Good ('_')"<<endl;
+            cout<<""<<endl;
         }
         
     }
+    
 public: void printAccountInfo(Account user)
     {
-        cout <<" As of Today your Account Balance is $"<<user.getBalance()<<".your service charges is -$"<< serviceCharge<<" Your Account Number is #"<<user.getAccountNumber()<<"Your interestRate is $"<<retireiveInterestRate()<<endl;
+        cout <<"As of today, your Account Balance is $"<<user.getBalance()<<endl;
+        cout<<"Your service charges is $"<< serviceCharge<<endl;
+        cout<<"Your Account Number is #"<<user.getAccountNumber()<<endl;
+        cout<<"Your interestRate is $"<<retireiveInterestRate()<<endl;
+        cout<<""<<endl;
     }
-
+    
 };
+
 class SavingAccount : Account
 {
     public : double SavinginterestRate;
-    public :double SavingminBalance;
+    public :double SavingminBalance=25;
     public :double SavingserviceCharge=5;
     public :bool SavingbalanceBelowMin;
     
-public: SavingAccount(Account S): Account(S.getAccountNumber(),S.getBalance())
+public: SavingAccount(Account S): Account(S.Balance,S.AccountNumber)
     {
         setInterestRateSaving(S);
         
@@ -165,11 +181,10 @@ public: double retireiveInterestRateSaving()
     {
         return SavinginterestRate;
     }
-public: void setMinimumBalance(Account balance)
+public: void setMinimumBalance(double balance)
     {
-        if (balance.getBalance()<=25) {
-            SavingminBalance=balance.getBalance();
-        }
+        
+        
     }
 public: double retireveMinimumBalance()
     {
@@ -187,55 +202,69 @@ public: void postInterest()
     {
         cout << SavinginterestRate<< endl;
     }
-public: bool SavingverifyBalance(Account balance)
+public: bool SavingverifyBalance(Account user)
     {
-        SavingbalanceBelowMin=false;
-        if (balance.getBalance()<SavingminBalance) {
+        //SavingbalanceBelowMin=false;
+        if (user.getBalance()<SavingminBalance) {
             SavingbalanceBelowMin=true;
-            balance.getBalance()-SavingserviceCharge;
             cout <<"ALERT!!! Your Balance is below minimum"<<endl;
+            cout<<""<<endl;
             return  true;
         }else
         {
             SavingbalanceBelowMin=false;
             cout <<"Your balance is Good ('_')"<<endl;
+            cout<<""<<endl;
         }
         return  SavingbalanceBelowMin;
     }
 public: void writeCheckForSaving(double amount,Account user)
     {
         if (SavingverifyBalance(user)) {
-            double checkAmount=user.withDraw(amount);
+            double checkAmount = user.withDraw(amount);
             cout<< "I Authorize the Payment of $"<<checkAmount<<endl;
-            cout << "Now your Balance is $"<< user.getBalance()<<endl;
-        }else{
-            
+            cout << "Now your Balance is $"<< user.getBalance() - amount <<endl; //change (- amount)
+            cout<<""<<endl;
         }
+            else{
+                    cout <<"Your balance is Good ('_')"<<endl;
+                cout<<""<<endl;
+
+       }
         
     }
 public: void printAccountInfo(Account user)
     {
-        cout <<" As of Today your Account Balance is $"<<user.getBalance()<<".your service charges is -$"<< SavingserviceCharge<<" Your Account Number is #"<<user.getAccountNumber()<<"Your interestRate is $"<<retireiveInterestRateSaving()<<endl;
+        if (SavingverifyBalance(user)) {
+            cout <<"As of Today your Account Balance is $"<< user.getBalance()-SavingserviceCharge<<" Charged with Service fee"<<endl;
+        }else{
+            cout <<"As of Today your Account Balance is $"<< user.getBalance()<<endl;
+        }
+        
+        cout<<"Your service charges is $"<< SavingserviceCharge<<endl;
+        cout<<"Your Account Number is #"<<user.getAccountNumber()<<endl;
+        cout<<"Your interestRate is $"<<retireiveInterestRateSaving()<<endl;
+        cout<<""<<endl;
     }
     
 };
 
-    int main() {
-        // insert code here...
-        Account awet=Account(3454,1000);
-        awet.accountRecipt();
-        
-        CheckingAccount awetCheckingAccount=CheckingAccount(awet);
-        
-        SavingAccount awetSavingAccount=SavingAccount(awet);
-
-        awetCheckingAccount.printAccountInfo(awet);
-        awetCheckingAccount.writeCheck(100,awet);
-        awet.withDraw(5000);
-        
-        
-        
-        return 0;
-    }
-
+int main() {
+    // insert code here...
+    Account awet=Account(109888,10);
+    awet.accountRecipt();
+   // CheckingAccount awetCheckingAccount=CheckingAccount(awet);
+    SavingAccount awetSavingAccount=SavingAccount(awet);
+    
+//    awetCheckingAccount.printAccountInfo(awet);
+//    //awetCheckingAccount.verifyBalance(awet);
+//    awetCheckingAccount.writeCheck(100,awet);
+//    awet.withDraw(50000);
+    awetSavingAccount.SavingverifyBalance(awet);
+    awetSavingAccount.printAccountInfo(awet);
+    awetSavingAccount.writeCheckForSaving(100,awet);
+    awet.withDraw(1000);
+    
+    return 0;
+}
 
