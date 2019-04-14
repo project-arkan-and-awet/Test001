@@ -15,8 +15,8 @@ class MemberType
     public : string First_Name;
     public : string Last_Name;
     public : string Member_id;
-    public : int Orders;
-    public : int Amount_spent;
+    public : int Orders=0;
+    public : int Amount_spent=0;
     
 public:  MemberType(string FN, string LN,string member_id,int orders,int amount_spent)
     {
@@ -49,10 +49,10 @@ public: int  get_Amount_Spent()
 public: void set_First_Name(string first)
     {
         First_Name=first;
-    }
+}
 public: void set_Last_Name(string last)
     {
-        Last_Name=last;
+        First_Name=last;
     }
 public: void set_Member_id(string id)
     {
@@ -74,29 +74,33 @@ public: double update_Amout_Spent(double newAmount)
     {
         return Amount_spent += newAmount;
 }
-//public: bool operation_test()
-//    {
-//        if(
-//    return
-//    }
-public: void show()
+
+public:  void show()
         {
                cout<<"Member's first name: "<<get_First_Name()<<endl;
                cout<<"Member's last name: "<<get_Last_Name()<<endl;
                cout<<"Member's member ID: "<<get_Member_id()<<endl;
                cout<<"Number of books bought: "<<get_Order()<<endl;
-               cout<<"Member's amount spent: "<<get_Amount_Spent()<<endl;
+               cout<<"Member's amount spent: $"<<get_Amount_Spent()<<endl;
         }
     
 };
 int main(){
+    string F_name, L_name;
+    string AccNum;
+    double Num_books, orders;
+   
+    cout<<"This program keeps track of the number of books purchased and the total amount spent in this store. \n";
+    cout<<""<<endl;
+    cout<<"Enter first and last name. \n";
+    cin>>F_name>>L_name;    cout<<""<<endl;
+    cout<<"Enter accout namber:"<<endl;
+    cin>>AccNum;    cout<<""<<endl;
+    cout<<"Enter number of books bought and amout spend: \n";
+    cin>>Num_books>>orders; cout<<""<<endl;
     
-    cout<<"This program keeps track of the number of books purchased and the total amount spent. \n";
-
-    MemberType member = MemberType("David", "Smith","#10689412",10,1200);
+    MemberType member = MemberType(F_name,L_name,AccNum, Num_books, orders);
     member.show();
+    
     return 0;
 }
-
-
-
