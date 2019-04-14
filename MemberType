@@ -1,4 +1,13 @@
-#includes <iostream>;
+//
+//  main.cpp
+//  Lab 2 B
+//
+//  Created by Awet Fikadu on 3/20/19.
+//  Copyright © 2019 Awet Fikadu. All rights reserved.
+//
+
+
+#include <iostream>
 using namespace std;
 
 class MemberType
@@ -9,7 +18,7 @@ class MemberType
     public : int Orders;
     public : int Amount_spent;
     
-    public:  MemberType(string FN, string LN,string member_id,int orders,int amount_spent)
+public:  MemberType(string FN, string LN,string member_id,int orders,int amount_spent)
     {
         First_Name=FN;
         Last_Name=LN;
@@ -17,39 +26,77 @@ class MemberType
         Orders=orders;
         Amount_spent=amount_spent;
     }
-    public: string get_First_Name()
+public: string get_First_Name()
     {
         return First_Name;
     }
-    public: string get_Last_Name()
+public: string get_Last_Name()
     {
         return Last_Name;
     }
-    public: int get_Member_id()
+public: string get_Member_id()
     {
         return Member_id;
     }
-    public: int get_Order()
+public: int get_Order()
     {
         return Orders;
     }
-    public: int  get_Amount_Spent()
+public: int  get_Amount_Spent()
     {
         return Amount_spent;
     }
-    public: void set_First_Name(string first)
+public: void set_First_Name(string first)
     {
         First_Name=first;
     }
-    public: void set_Last_Name(string last)
+public: void set_Last_Name(string last)
     {
         Last_Name=last;
     }
-    public: void set_Member_id(int id)
+public: void set_Member_id(string id)
     {
         Member_id=id;
     }
-    
-    
-    
+public: void set_Order(int orders)
+    {
+        Orders = orders;
+    }
+public: int update_Orders(int orders)
+    {
+        return Orders + orders;
+    }
+public: void set_Amount_Spent(int amount_spent)
+    {
+        Amount_spent = amount_spent;
+    }
+public: double update_Amout_Spent(double newAmount)
+    {
+        return Amount_spent += newAmount;
 }
+//public: bool operation_test()
+//    {
+//        if(
+//    return
+//    }
+public: void show()
+        {
+               cout<<"Member's first name: "<<get_First_Name()<<endl;
+               cout<<"Member's last name: "<<get_Last_Name()<<endl;
+               cout<<"Member's member ID: "<<get_Member_id()<<endl;
+               cout<<"Number of books bought: "<<get_Order()<<endl;
+               cout<<"Member's amount spent: "<<get_Amount_Spent()<<endl;
+        }
+    
+};
+int main(){
+    
+    cout<<"This program keeps track of the number of books purchased and the total amount spent. \n";
+
+    MemberType member = MemberType("David", "Smith","#10689412",10,1200);
+    member.show();
+    return 0;
+}
+
+
+
