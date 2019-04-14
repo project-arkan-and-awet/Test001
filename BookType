@@ -1,134 +1,472 @@
+//
+//  main.cpp
+//  Lab 2 A
+//
+//  Created by Awet Fikadu on 3/20/19.
+//  Copyright © 2019 Awet Fikadu. All rights reserved.
+//
 
-
-#include <iostream>
+#include<iostream>
+#include<string>
 
 using namespace std;
 
 
-
-class BookType
+class bookType//class to store information about the book
 {
-public: string Title;
-public: static string author_one,author_two,author_three,author_four;
-public: string heading_one,heading_two,heading_three,heading_four,heading_five,heading_six;
-public: string ISBN;
-public: string Publisher;
-public: double Price;
-public: int Year_of_publication;
-public: int Number_of_copies;
-public: int Number_of_authors;
-public: int Number_of_headings;
+public:
+    string title;             //stories the title of an oject
+    string Authors[4];//stores the Authors names
+    string headings[6];
+    int n_Author;             //stores number of Authors
+    string publishr;         //Stores the name of Publisher
+    string ISBN;             //store ISBN NUmber
+    double price;           //Stores the price
+    int copies;
     
-public: BookType(string title,string heading,string isbn,string publisher,double price,int YearOFPublication,int NumberOFCopies)
-    {
-        Title=title;
-        heading_one=heading;
-        ISBN=isbn;
-        Publisher=publisher;
-        Price=price;
-        Year_of_publication=YearOFPublication;
-        Number_of_copies=NumberOFCopies;
-        
-    }
+//public:
+//    bookType(); //constructor
+//    void setTitle(string); //function declaration to set the title
+//    string r_title();   //function declaration to return the title
+//    void showTitle(); //function declaration to show the title
+//
+//    void SetAuthors(int); //function declaration to set the Author(s)
+//    void ShowAuthors()const; //function declaration to show the Autho(s)
+//
+//    void setPublishr(string); //function declaration to set the Publisher name
+//    void showPublishr();  //function declaration to show the Publisher name
+//
+//    void setIBSN(string); //function declaration to set the IBSN No.
+//    string r_IBSN();  //function declaration to return the IBSN No.
+//    void showIBSN();   //function declaration to show the IBSN No.
+//
+//    void setPrice(double); //function declaration to set the price
+//    double R_price();  //function declaration to return the price
+//    void showPrice();    //function declaration to show the price
+//
+//    void setCopies(int); //function declaration to set the No.of Copies
+//    int r_copies();  //function declaration to return the No.of Copies
+//    void showCopies();  //function declaration to show the No.of Copies
+//    void u_Copies(int); //function declaration to update the No.of Copies
+//
+//    void print(); //function declaration to print the all data about the book
     
-public: string get_Title()
+void setTitle(string t)                                            //Functon to set the title
+{
+    title = t;
+}
+string r_title()                                                //Functon to return the title
+{
+    return title;
+}
+void showTitle()                                                //Functon to show the title
+{
+    cout <<"\tTitle of the book : "<< r_title() << endl;
+}
+
+void SetAuthors(int n)                                          //Functon to set the names of author(s)
+{
+    cin.ignore();
+    for (int i = 0; i <n; i++)
     {
-        return  Title;
-    }
-public: void set_Title(string T)
-    {
-        Title=T;
-        
-    }
-public: string check_Title(string T)
-    {
-        if (Title==T) {
-            return "Title is Right";
-        }
-        
-        return  "Title is not Right";
-        
-    }
-public: int get_Number_of_Copies()
-    {
-        return Number_of_copies;
-    }
-public: void set_Number_of_Copies(int copies)
-    {
-        Number_of_copies=copies;
-    }
-public: int Update_Number_of_Copies()
-    {
-        return Number_of_copies;
-        
-    }
-public: string get_Publisher()
-    {
-        return Publisher;
-    }
-public: void set_Publisher(string Pub)
-    {
-        Publisher=Pub;
-        
-    }
-public: double get_Price()
-    {
-        return Price;
-        
-    }
-public: void set_Price(double newPrice)
-    {
-        Price=newPrice;
-    }
-public: string get_ISBN()
-    {
-        return ISBN;
-    }
-public: void set_ISBN(string new_ISBN)
-    {
-        ISBN=new_ISBN;
-    }
-public: void set_Author(string Author_one,string Author_two,string Author_three,string Author_four)
-    {
-        author_one=Author_one;
-        Author_two=Author_two;
-        author_three=Author_three;
-        author_four=Author_four;
-    }
-public: void set_Author(string Author_one,string Author_two)
-    {
-        author_one=Author_one;
-        author_two=Author_two;
-    }
-public: void set_Author(string Author_one)
-    {
-        author_one=Author_one;
-        
+        cout <<"\tAuthor #"<< i + 1<<" : ";
+        getline(cin, Authors[i]);
     }
     
-     public: string get_Authors()
-     {
-     return author_one+" "+author_two+" "+author_three+" "+author_four;
-     }
-     
+}
+void ShowAuthors() const                                        //Functon to display the names of Authors
+{
+    cout <<"\tAuthor(s): ";
+    if (Authors[0] != "")
+        cout << Authors[0];
+    if (Authors[1] != "")
+        cout <<", "<<Authors[1];
+    if (Authors[2] != "")
+        cout <<", "<< Authors[2];
+    if (Authors[3] != "")
+        cout <<", "<< Authors[3];
+    cout << endl;
+}
+void setPublishr(string p)                                          //Functon to set the name of publisher
+{
+    publishr = p;
+}
+void showPublishr()                                             //Functon to show the name of publisher
+{
+    cout <<"\tPublisher : "<< publishr << endl;
+}
+void setISBN(string i)                                      //Functon to set ISBN no.
+{
+    ISBN = i;
+}
+string r_ISBN()                                             //Functon to return ISBN no.
+{
+    return ISBN;
+}
+void showISBN()                                             //Functon to return ISBN no.
+{
+    cout <<"\tISBN : "<< r_ISBN() << endl;
+}
+void setPrice(double p)                                     //Functon to set the price of a book
+{
+    price = p;
+}
+double R_price()                                            //Functon to return the price of a book
+{
+    return price;
+}
+void showPrice()                                            //Functon to show the price of a book
+{
+    cout <<"\tPrice : "<< R_price() << endl;
+}
+void setCopies(int n)                                       //Functon to set the no. of copies of a book
+{
+    copies = n;
+}
+int r_copies()                                              //Functon to return the no. of copies of a book
+{
+    return copies;
+}
+void u_Copies(int u)                                        //Functon to update the no. of copies of a book
+{
+    copies=u;
+}
+void showCopies()
+{
+    cout <<"\tCopies in Stock : "<< r_copies() << endl;
+}
+void print()                                            //Functon to print the book information
+{
+    showTitle();
+    ShowAuthors();
+    //showPublishr();
+    showISBN();
+    //showPrice();
+    showCopies();
+}
+bookType()                                              //constructor definition
+{
+    title = "";
+    Authors[0] = "";
+    Authors[1] = "";
+    Authors[2] = "";
+    Authors[3] = "";
     
-    
-    
-    
-    
-    
+    headings[0] = "";
+    headings[1] = "";
+    headings[2] = "";
+    headings[3] = "";
+    headings[4] = "";
+    headings[5] = "";
+    n_Author = 0;
+    ISBN = "0-00000-00";
+    price = 0.00;
+    copies = 0;
+}
+
 };
 
+
+void search();
+bookType A[10];                                              //creating object using Aray
 
 
 int main()
 {
-    BookType math=BookType("Algebra", "Pei", "sfd34234", "Macipub", 34.0,2009,4);
-    cout <<math.get_Publisher()<<endl;
-    cout <<math.check_Title("Algebra")<<endl;
-    math.set_Author("Arkan Mekonen","sdas","das","dasdd");
-        cout <<math.get_Authors()<<endl;
-
+    string ti;
+//    int n,c=1;
+//    double p;
+//    char co;
+    bookType book;
+    bookType book1;
+    book1.setTitle("Fewsi Libi");
+    book1.SetAuthors(2);
+    book1.Authors[0]="John Liwes";
+    book1.Authors[1]="Will Smith";
+    book1.headings[0] = "Nafkot";
+    book1.headings[0] = "Medhanit";
+    book1.setPrice(75.89);
+    book1.setISBN("4847203734");
+    book1.setCopies(13);
     
+    bookType book2;
+    book2.setTitle("Who to Be Blamed");
+    book2.SetAuthors(1);
+    book2.Authors[0]="John Liwes";
+    book2.headings[0] = "Public Opinions";
+    book2.setPrice(102.47);
+    book2.setISBN("534627109");
+    book2.setCopies(7);
+    
+    bookType book3;
+    book3.setTitle("Admas");
+    book3.SetAuthors(3);
+    book3.Authors[0]="Budulu Nebari";
+    book3.Authors[1]="Nimen Kihish";
+    book3.Authors[2]="Menyu Tehatati";
+    book3.headings[0] = "Deret Albo";
+    book3.headings[0] = "Ankarira Trie";
+    book3.headings[0] = "Hilmi Semay";
+    book3.setPrice(300);
+    book3.setISBN("0709089675");
+    book3.setCopies(50);
+    
+    bookType book4;
+    book4.setTitle("The Golden Book");
+    book4.SetAuthors(2);
+    book4.Authors[0]="Jonathan Joshua";
+    book4.Authors[1]="Bekele Abebe";
+    book4.headings[0]="Calling For Help";
+    book4.setPrice(34.96);
+    book4.setISBN("43536728");
+    book4.setCopies(30);
+    
+    bookType book5;
+    book5.setTitle("A 1000 Miles");
+    book5.SetAuthors(2);
+    book5.Authors[0]="Gual Sewra";
+    book5.Authors[1]="Wedi Keshi";
+    book5.headings[0]="The taugh Night";
+    book5.headings[0]="Lonely life";
+    book5.setPrice(250);
+    book5.setISBN("547892964i3");
+    book5.setCopies(10);
+    
+    bookType book6;
+    book6.setTitle("The Stranger");
+    book6.SetAuthors(1);
+    book6.Authors[0]="Steve Chon";
+    book6.headings[0] = "The wierd Looking Guy";
+    book6.headings[0] = "The stalker";
+    book6.setPrice(89);
+    book6.setISBN("34456789977");
+    book6.setCopies(23);
+    
+    bookType book7;
+    book7.setTitle("The Precious");
+    book7.SetAuthors(4);
+    book7.Authors[0]="Adam Luke";
+    book7.Authors[1]="Kendrik James";
+    book7.Authors[2]="Luci Anderson";
+    book7.Authors[3]="Marry Jackson";
+    book7.headings[0]="Looking for The Precious";
+    book7.setPrice(150);
+    book7.setISBN("87326514");
+    book7.setCopies(25);
+    
+    bookType book8;
+    book8.setTitle(" Working Hard or Working Smart");
+    book8.SetAuthors(3);
+    book8.Authors[0]="Angel Kevin";
+    book8.Authors[1]="Mark James";
+    book8.Authors[2]="Brayn Thomas";
+    book8.headings[0] = "Why Working Hard is Not The Way to Success";
+    book8.setPrice(15);
+    book8.setISBN("19876678");
+    book8.setCopies(90);
+    
+    bookType book9;
+    book9.setTitle("Homun Rights");
+    book9.SetAuthors(1);
+    book9.Authors[0]="Zahra Ali";
+    book9.headings[0] = "What is Human Rights";
+    book9.headings[0] = "Does Everyone Have The Same Rights";
+    book9.headings[0] = "The Role of Human Organizations Play";
+    book9.headings[0] = "Does Immigrants Have The Same Righs As Citizens";
+    book9.setPrice(65);
+    book9.setISBN("161543789");
+    book9.setCopies(60);
+    
+    bookType book10;
+    book10.setTitle("Journey in The Woods");
+    book10.SetAuthors(1);
+    book10.Authors[0]="Zahr Sheba";
+    book10.headings[0] = "Lidia Got Lost";
+    book10.headings[0] = "People of The Woods";
+    book10.setPrice(80);
+    book10.setISBN("607549301");
+    book10.setCopies(200);
+
+    /*for (int i = 0; i < 10; i++)                                 //loop to take the data of  multiple books
+    {
+        cout <<"BOOK No."<< i + 1 << endl;
+        cout <<"Enter the Title :";
+        getline(cin, ti);                                       //Takes the title from the user
+        A[i].setTitle(ti);                                          //set the title in private member of a class
+        cout <<"Enter the Numbers of Authors : ";
+        while (!(cin >> n) || n<0) {                                //validation checking of number of authors
+            cin.clear();
+            cin.ignore(999, '\n');
+            cout <<"Invalid data type! \nPlease Enter the Numbers of Authors again :";
+        }
+        if (n > 4 || n <= 0)
+        {
+            cout <<"Enter the Numbers of Authors in the range of 1~4 :";
+            cin >> n;
+        }
+        A[i].SetAuthors(n);                                 //set the Authors NAme
+        
+        cout <<"Enter the Name of Publisher :";
+        getline(cin, ti);                                   //Takes the Nmae of the publisher from the user
+        A[i].setPublishr(ti);                               //sets the publisher name
+        cout <<"Enter the ISBN no : ";
+        getline(cin, ti);                                     //Takes the ISBN no. from the user
+        A[i].setISBN(ti);                                       //ststhe ISBN name
+        cout <<"Enter the price : ";
+        while (!(cin >> p) || p<0) {                            //validation checking of price entered by the user
+            cin.clear();
+            cin.ignore(999, '\n');
+            cout <<"Invalid data type! \nPlease Enter the Price again :";
+        }
+        A[i].setPrice(p);                                  //sets the price of the book
+        cout <<"Enter the number of copies :";
+        while (!(cin >> n) || n<0) {                       //validation checking of no of copies entered by the user
+            cin.clear();
+            cin.ignore(999, '\n');
+            cout <<"Invalid data type! \nPlease Enter the  number of copies again :";
+        }
+        A[i].setCopies(n);                                  //set the no. of copies
+        cout << endl;
+        cin.ignore();
+    }
+    for (int i = 0; i < 3; i++)                             //loop to diplay the data of multiple books
+    {
+        A[i].print();
+        cout << endl;
+    }
+     */
+    
+    cout<<"This program will let you search a book by its title, ISBN or subject headings. \n";
+    search();                                               //calling of search function
+    system("pause");
     return 0;
 }
+
+void search()                                               //function to serach the book by ISBN no. or by title
+{
+    int ch,c=1,n;
+    //char co;
+    string ti;
+    cout <<"Enter 1 to Search a book by 'Title', 2 to search by its ISBN No or 3 to search by subject headings: ";
+    cin >> ch;                                              //takes the choice
+    switch (ch)
+    {
+        case 1:                                             //executes if user enters 1
+        {
+            cin.ignore();
+            cout <<"Enter the title :";
+            getline(cin, ti);
+            for (int i = 0; i < 10; i++)
+            {
+                string t = A[i].r_title();
+                if (ti == t)
+                {
+                    c = 0;
+                    A[i].print();
+                    cout<<bookType().headings[i]<<endl;
+//                    cout <<"Did you want of modify the no of copies (y/n) :";
+//                    cin >> co;
+//                    switch (co)
+//                    {
+//                        case'y':
+//                        {
+//                            cout <<"Enter the nmuber of Copies :";
+//                            cin >> n;
+//                            A[i].u_Copies(n);
+//                            cout << endl <<"Modified DATA "<< endl << endl;
+//                            A[i].print();
+//                            break;
+//                        }
+//                        case'n':
+//                            break;
+//                        default:
+//                            cout <<"Invliad Choice"<< endl;
+//                    }
+                }
+                if (c == 1 && i == 2)
+                    cout <<"Not found a book with this title"<< endl;
+            }
+            break;
+        }
+        case 2:                                                     //executes if user enters 2
+        {
+            cin.ignore();
+            cout <<"Enter the IBSN :";
+            getline(cin, ti);
+            for (int i = 0; i < 10; i++)   // i<3 has replaced by 10
+            {
+                string t = A[i].r_ISBN();
+                if (t == ti)
+                {
+                    c = 1;
+                    A[i].print();
+                    cout<<bookType().headings[i]<<endl;
+//                    cout <<"Did you want to modify the no. of copies (y/n) :";
+//                    cin >> ch;
+//                    switch (ch)
+//                    {
+//                        case'y':
+//                        {
+//                            cout <<"Enter the nmuber of Copies :";
+//                            cin >> n;
+//                            A[i].u_Copies(n);
+//                            cout << endl <<"Modified DATA "<< endl << endl;
+//                            A[i].print();
+//                            break;
+//                        }
+//                        case'n':
+//                            break;
+//                        default:
+//                            cout <<"Invliad Choice"<< endl;
+//                    }
+                }
+                if (c == 1 && i == 2)
+                    cout <<"Not found a book with this ISBN NO."<< endl;
+            }
+            break;
+            
+        }
+       
+        case 3:                                             //executes if user enters 1
+        {
+            cin.ignore();
+            cout <<"Enter the subjects :";
+            getline(cin, ti);
+            for (int i = 0; i < 6; i++)
+            {
+                string t = A[i].headings[i];
+                if (ti == t)
+                {
+                    c = 0;
+                    A[i].print();
+                    cout<<bookType().headings[i]<<endl;
+//                    cout <<"Did you want of modify the no of copies (y/n) :";
+//                    cin >> co;
+//                    switch (co)
+//                    {
+//                        case'y':
+//                        {
+//                            cout <<"Enter the nmuber of Copies :";
+//                            cin >> n;
+//                            A[i].u_Copies(n);
+//                            cout << endl <<"Modified DATA "<< endl << endl;
+//                            A[i].print();
+//                            break;
+//                        }
+//                        case'n':
+//                            break;
+//                        default:
+//                            cout <<"Invliad Choice"<< endl;
+//                    }
+                }
+                if (c == 1 && i == 2)
+                    cout <<"Not found a book with this subject"<< endl;
+            }
+            break;
+        }
+        default:                                                    //exectes if user enter invalid choice
+            cout <<"Invliad choice"<< endl;
+    }
+    
+}
+
