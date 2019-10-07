@@ -1,0 +1,42 @@
+//* Awet Fikadu, cis25
+//  complexDrive.cpp
+//  Operator overloading assignment Submit Assignment Operator overloading assignment Submit Assignment Operator overloading assignment Submit Assignment Operator overloading assignment Submit Assignment Operator Overloading Assignment
+//
+//  Created by Awet Fikadu on 10/2/19.
+//  Copyright © 2019 Awet Fikadu. All rights reserved.
+//
+/* Driver program to test our complex number class.
+ * */
+
+#include <iostream>
+#include "Complex.hpp"
+
+using namespace std;
+
+int main(){
+    
+    ComplexNumber realValue = new ComplexNumber(3);
+    ComplexNumber firstComplex(1, 1);
+    ComplexNumber secondComplex(2, 3);
+    
+    ComplexNumber result = firstComplex + secondComplex;
+
+    cout << "Addition result: " << result << endl;
+    
+    cout << "Subtraction result: " <<
+        secondComplex - firstComplex << endl;
+    
+    cout<< "Addition of two complex numbers result: " << firstComplex * secondComplex<<endl;
+    
+    cout << "Adding an integer to a complex number: \n";
+    
+    
+    if (firstComplex == secondComplex){
+        cout << "They're equal!" << endl;
+    } else {
+        cout << "they're not equal!" << endl;
+    }
+    
+    return 0;
+    
+}
